@@ -56,7 +56,12 @@
           $output[] = $d->$element;
         }
       } elseif ($element != "") {
-        $output[] = $d->$element;
+        if (str_contains("|", $element)) {
+          $split = explode("|", $element);
+          $output[$d->$split[0]] = $d->$split[1];
+        } else {
+          $output[] = $d->$element;
+        }
       } else {
         $output[] = $d;
       }
@@ -69,9 +74,7 @@
   $nomad_servers  = array_unique(consul_curl("/v1/catalog/service/nomad", "Node"));
   $consul_clients = array_unique(consul_curl("/v1/agent/members", "Name", "Status", "1"));
   $nomad_clients  = array_unique(consul_curl("/v1/catalog/service/nomad-client", "Node"));
-  $all_names      = array_unique(consul_curl("/v1/agent/members", "Name"));
-  $all_addr       = array_unique(consul_curl("/v1/agent/members", "Addr"));
-  $all_clients    = array_combine($all_names, $all_addr);
+  $all_clients    = array_unique(consul_curl("/v1/agent/members", "Name|Addr"));
 
   $bla = [
     $consul_servers,
@@ -79,8 +82,6 @@
     $nomad_servers,
     $consul_clients,
     $nomad_clients,
-    $all_names,
-    $all_addr,
     $all_clients
   ];
 
