@@ -68,9 +68,15 @@
                 <div class="border rounded p-4 d-flex flex-column server">
                   <span class="fa-stack mb-4">
                     <i class="fak fa-<?=strtolower($pillar)?> fa-stack-1x color-gray" data-fa-transform="left-13"></i>
+                    <?php if ($pillar_data["Checks"]["consul_client"]) { ?>
+                    <i class="fak fa-consul fa-stack-1x color-gray" data-fa-transform="up-22 left-40"></i>
+                    <?php } ?>
+                    <?php if ($pillar_data["Checks"]["nomad_client"]) { ?>
+                    <i class="fak fa-nomad fa-stack-1x color-gray" data-fa-transform="up-22 left-40"></i>
+                    <?php } ?>
                     <i class="fat fa-server fa-4x"></i>
                   </span>
-                  <span class="mt-1"><?=$h?></span>
+                  <span class="mt-1"><?=$server?></span>
                 </div>
               </div>
               <?php } ?>
