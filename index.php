@@ -57,13 +57,13 @@
       <div class="container-fluid pt-2 h-100">
         <div class="row d-flex flex-row h-100 text-center">
 
-          <?php foreach ($pillars as $pillar) { ?>
+          <?php foreach ($pillars as $pillar => $pillar_data) { ?>
           <div class="col border-end d-flex flex-column h-100">
             <div class="bg-light fw-medium fs-4 py-2 shadow-sm mb-5 border"><i
                 class="fak fa-<?=strtolower($pillar)?> color-<?=strtolower($pillar)?> me-2"></i><?=$pillar?>
             </div>
             <div class="d-flex align-items-start flex-column h-100 align-items-center">
-              <?php foreach ($pillar["Servers"] as $server) { ?>
+              <?php foreach ($pillar_data["Servers"] as $server) { ?>
               <div class="d-flex col flex-column text-center">
                 <div class="border rounded p-4 d-flex flex-column server">
                   <span class="fa-stack mb-4">
