@@ -23,6 +23,10 @@
     $pillars["Docker"]["Servers"][$h] = ["consul_client" => true, "nomad_client" => true];
   }
 
+  echo "<pre>";
+    print_r($pillars);
+  echo "</pre>";
+
 ?>
 
 <!doctype html>
