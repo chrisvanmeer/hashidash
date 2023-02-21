@@ -3,24 +3,23 @@
   $inv = json_decode($_ENV['INVENTORY']);
   $consul = $_ENV['CONSUL_HTTP_ADDR'];
 
-  $pillars = [
-    "Consul",
-    "Vault",
-    "Nomad",
-    "Docker"
-  ];
+  $pillars = [];
 
   foreach ($inv->{"consul_servers"}->{'hosts'} as $h) {
-    $pillars["Consul"]["Servers"][$h] = ["consul_client" => false, "nomad_client" => false];
+    $pillars["Consul"]["Servers"][] = $h;
+    $pillars["Consul"]["Checks"] = ["consul_client" => false, "nomad_client" => false];
   }
   foreach ($inv->{"vault_servers"}->{'hosts'} as $h) {
-    $pillars["Vault"]["Servers"][$h] = ["consul_client" => true, "nomad_client" => false];
+    $pillars["Vault"]["Servers"][] = $h;
+    $pillars["Vault"]["Checks"] = ["consul_client" => true, "nomad_client" => false];
   }
   foreach ($inv->{"nomad_servers"}->{'hosts'} as $h) {
-    $pillars["Nomad"]["Servers"][$h] = ["consul_client" => true, "nomad_client" => false];
+    $pillars["Nomad"]["Servers"][] = $h;
+    $pillars["Nomad"]["Checks"] = ["consul_client" => true, "nomad_client" => false];
   }
   foreach ($inv->{"docker_clients"}->{'hosts'} as $h) {
-    $pillars["Docker"]["Servers"][$h] = ["consul_client" => true, "nomad_client" => true];
+    $pillars["Docker"]["Servers"][] = $h;
+    $pillars["Docker"]["Checks"] = ["consul_client" => true, "nomad_client" => true];
   }
 
   echo "<pre>";
