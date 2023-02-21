@@ -29,29 +29,25 @@
     $url = $consul_address.$path;
     $ch = curl_init($url);
     $options = array(
-      CURLOPT_RETURNTRANSFER => true,         // return web page
-      CURLOPT_HEADER         => false,        // don't return headers
-      CURLOPT_FOLLOWLOCATION => false,         // follow redirects
-      CURLOPT_AUTOREFERER    => true,         // set referer on redirect
-      CURLOPT_CONNECTTIMEOUT => 20,          // timeout on connect
-      CURLOPT_TIMEOUT        => 20,          // timeout on response
-      CURLOPT_SSL_VERIFYHOST => 0,            // don't verify ssl
-      CURLOPT_SSL_VERIFYPEER => false,        //
+      CURLOPT_RETURNTRANSFER => true,
+      CURLOPT_HEADER         => false,
+      CURLOPT_FOLLOWLOCATION => false,
+      CURLOPT_AUTOREFERER    => true,
+      CURLOPT_CONNECTTIMEOUT => 20,
+      CURLOPT_TIMEOUT        => 20,
+      CURLOPT_SSL_VERIFYHOST => 0,
+      CURLOPT_SSL_VERIFYPEER => false,
       CURLOPT_VERBOSE        => 1,
       CURLOPT_HTTPHEADER     => array(
           "X-Consul-Token: $consul_token",
           "Content-Type: application/json"
       )
-
     );
 
     curl_setopt_array($ch,$options);
     $data = curl_exec($ch);
-    $curl_errno = curl_errno($ch);
-    $curl_error = curl_error($ch);
-    //echo $curl_errno;
-    //echo $curl_error;
     curl_close($ch);
+
     $data = json_decode($data);
     $output = [];
     foreach ($data as $d) {
@@ -146,7 +142,7 @@
                     <?php } ?>
                     <i class="fat fa-server fa-4x"></i>
                   </span>
-                  <span class="mt-1"><?=$server?> (<?=$totalchecks?> - <?=$currentchecks?>)</span>
+                  <span class="mt-1"><?=$server?></span>
                 </div>
               </div>
               <?php } ?>
