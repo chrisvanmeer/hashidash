@@ -66,10 +66,10 @@
     return $output;
   }
 
-  $consul_servers = ksort(array_unique(consul_curl("/v1/catalog/service/consul", "Node")));
+  $consul_servers = array_unique(consul_curl("/v1/catalog/service/consul", "Node"));
   $vault_servers  = array_unique(consul_curl("/v1/catalog/service/vault", "Node"));
   $nomad_servers  = array_unique(consul_curl("/v1/catalog/service/nomad", "Node"));
-  $consul_clients = ksort(array_unique(consul_curl("/v1/agent/members", "Name")));
+  $consul_clients = array_unique(consul_curl("/v1/agent/members", "Name"));
   $nomad_clients  = array_unique(consul_curl("/v1/catalog/service/nomad-client", "Node"));
 
   $bla = [
@@ -122,15 +122,25 @@
             </div>
             <div class="d-flex align-items-start flex-column h-100 align-items-center">
               <?php foreach ($pillar_data["Servers"] as $server) { ?>
+              <?php
+                  $totalchecks = count($pillar_data["Checks"] + 1);
+                  $currentchecks = 0;
+                  if (in_array($server, $consul_servers)) { $c = "consul"; $currentchecks++; } else { $c = "gray"; }
+                  if (in_array($server, $consul_clients)) { $cc = "consul"; $currentchecks++; } else { $cc = "gray"; }
+                  if (in_array($server, $consul_clients)) { $nc = "consul"; $currentchecks++; } else { $nc = "gray"; }
+                  if ($currentchecks == $totalchecks) { $border = " border-color-success"; } else { $border = "border-color-danger"; }
+                  if ($currentchecks == 0) { $border = ""; }
+                ?>
               <div class="d-flex col flex-column text-center">
-                <div class="border rounded p-4 d-flex flex-column server">
+                <div class="border rounded p-4 d-flex flex-column server<?=$border?>">
                   <span class="fa-stack mb-4">
-                    <i class="fak fa-<?=strtolower($pillar)?> fa-stack-1x color-gray" data-fa-transform="left-13"></i>
+                    <i class="fak fa-<?=strtolower($pillar)?> fa-stack-1x color-<?=$c?>"
+                      data-fa-transform="left-13"></i>
                     <?php if ($pillar_data["Checks"]["consul_client"]) { ?>
-                    <i class="fak fa-consul fa-stack-1x color-gray" data-fa-transform="up-22 left-40"></i>
+                    <i class="fak fa-consul fa-stack-1x color-<?=$cc?>" data-fa-transform="up-22 left-40"></i>
                     <?php } ?>
                     <?php if ($pillar_data["Checks"]["nomad_client"]) { ?>
-                    <i class="fak fa-nomad fa-stack-1x color-gray" data-fa-transform="up-22 right-40"></i>
+                    <i class="fak fa-nomad fa-stack-1x color-<?=$nc?>" data-fa-transform="up-22 right-40"></i>
                     <?php } ?>
                     <i class="fat fa-server fa-4x"></i>
                   </span>
