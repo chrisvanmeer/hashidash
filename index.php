@@ -58,7 +58,7 @@
       } elseif ($element != "") {
         if (strpos($element, "|") !== false) {
           $split = explode("|", $element);
-          $output[$d->$split[0]] = $d->$split[1];
+          $output[] = [$d->$split[0]=> $d->$split[1]];
         } else {
           $output[] = $d->$element;
         }
