@@ -117,7 +117,7 @@
                   $currentchecks = 0;
 
                   if (in_array($server, $consul_servers)) {
-                    $c = "consul"; $currentchecks++;
+                    $c = "consul"; $currentchecks++; $currentchecks++;
                   } elseif (in_array($server, $vault_servers)) {
                     $c = "vault"; $currentchecks++;
                   } elseif (in_array($server, $nomad_servers)) {
