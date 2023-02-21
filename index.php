@@ -23,7 +23,7 @@
     $pillars["Docker"]["Checks"] = ["consul_client", "nomad_client"];
   }
 
-  function consul_curl ($path, $element, $statement = "") {
+  function consul_curl ($path, $element, $search = "", $value = "") {
     global $consul_address, $consul_token, $pillars, $checks;
 
     $url = $consul_address.$path;
@@ -51,8 +51,8 @@
     $data = json_decode($data);
     $output = [];
     foreach ($data as $d) {
-      if ($statement != "") {
-        if ($d->$statement) {
+      if ($search != "") {
+        if ($d->$search == "$value") {
           $output[] = $d->$element;
         }
       } else {
@@ -65,7 +65,7 @@
   $consul_servers = array_unique(consul_curl("/v1/catalog/service/consul", "Node"));
   $vault_servers  = array_unique(consul_curl("/v1/catalog/service/vault", "Node"));
   $nomad_servers  = array_unique(consul_curl("/v1/catalog/service/nomad", "Node"));
-  $consul_clients = array_unique(consul_curl("/v1/agent/members", "Name", "Status == 1"));
+  $consul_clients = array_unique(consul_curl("/v1/agent/members", "Name", "Status", "1"));
   $nomad_clients  = array_unique(consul_curl("/v1/catalog/service/nomad-client", "Node"));
 
   $bla = [
