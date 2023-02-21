@@ -1,3 +1,9 @@
+<?php
+
+  $inv = $_ENV['INVENTORY'];
+
+?>
+
 <!doctype html>
 <html lang="en" class="h-100">
 
@@ -14,8 +20,9 @@
 </head>
 
 <body class="d-flex h-100">
+
   <pre>
-  <?=$_ENV['INVENTORY']?>
+  <?=json_decode($inv)?>
   </pre>
 
   <div class="container-fluid g-0">
