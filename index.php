@@ -1,6 +1,6 @@
 <?php
 
-  $inv = $_ENV['INVENTORY'];
+  $inv = json_encode($_ENV['INVENTORY']);
 
 ?>
 
