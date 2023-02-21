@@ -70,18 +70,6 @@
   $consul_clients = array_unique(consul_curl("/v1/agent/members", "Name", "Status", "1"));
   $nomad_clients  = array_unique(consul_curl("/v1/catalog/service/nomad-client", "Node"));
 
-  $bla = [
-    $consul_servers,
-    $vault_servers,
-    $nomad_servers,
-    $consul_clients,
-    $nomad_clients,
-  ];
-
-  echo "<pre>";
-    print_r($bla);
-  echo "</pre>";
-
 ?>
 
 <!doctype html>
