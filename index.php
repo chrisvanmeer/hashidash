@@ -146,7 +146,7 @@
                     <?php } ?>
                     <i class="fat fa-server fa-4x"></i>
                   </span>
-                  <span class="mt-1"><?=$server?></span>
+                  <span class="mt-1"><?=$server?> (<?=$totalchecks?> - <?=$currentchecks?>)</span>
                 </div>
               </div>
               <?php } ?>
