@@ -1,9 +1,15 @@
 <?php
 
-  $inv = json_decode($_ENV['INVENTORY']);
-  $consul = $_ENV['CONSUL_HTTP_ADDR'];
+  $inv            = json_decode($_ENV['INVENTORY']);
+  $consul_address = $_ENV['CONSUL_HTTP_ADDR'];
+  $consul_token   = $_ENV['CONSUL_HTTP_TOKEN'];
 
   $pillars = [];
+
+  $checks = [
+    "consul_client",
+    "nomad_client"
+  ];
 
   foreach ($inv->{"consul_servers"}->{'hosts'} as $h) {
     $pillars["Consul"]["Servers"][] = $h;
@@ -22,8 +28,46 @@
     $pillars["Docker"]["Checks"] = ["consul_client" => true, "nomad_client" => true];
   }
 
+
+  function consul_curl ($path, $host, $check) {
+    global $consul_address, $consul_token, $pillars, $checks;
+
+    $url = $consul_address.$path;
+    $ch = curl_init($url);
+    $options = array(
+      CURLOPT_RETURNTRANSFER => true,         // return web page
+      CURLOPT_HEADER         => false,        // don't return headers
+      CURLOPT_FOLLOWLOCATION => false,         // follow redirects
+      // CURLOPT_ENCODING       => "utf-8",           // handle all encodings
+      CURLOPT_AUTOREFERER    => true,         // set referer on redirect
+      CURLOPT_CONNECTTIMEOUT => 20,          // timeout on connect
+      CURLOPT_TIMEOUT        => 20,          // timeout on response
+      CURLOPT_POST            => 1,            // i am sending post data
+      CURLOPT_POSTFIELDS     => $request,    // this are my post vars
+      CURLOPT_SSL_VERIFYHOST => 0,            // don't verify ssl
+      CURLOPT_SSL_VERIFYPEER => false,        //
+      CURLOPT_VERBOSE        => 1,
+      CURLOPT_HTTPHEADER     => array(
+          "X-Consul-Token: $consul_token",
+          "Content-Type: application/json"
+      )
+
+    );
+
+    curl_setopt_array($ch,$options);
+    $data = curl_exec($ch);
+    $curl_errno = curl_errno($ch);
+    $curl_error = curl_error($ch);
+    //echo $curl_errno;
+    //echo $curl_error;
+    curl_close($ch);
+    return $data;
+
+  }
+
   echo "<pre>";
-    print_r($pillars);
+    $bla = consul_curl("/v1/sys/health", "consul1", "");
+    echo $bla;
   echo "</pre>";
 
 ?>
