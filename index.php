@@ -66,10 +66,10 @@
     return $output;
   }
 
-  $consul_servers = sort(array_unique(consul_curl("/v1/catalog/service/consul", "Node")));
+  $consul_servers = ksort(array_unique(consul_curl("/v1/catalog/service/consul", "Node")));
   $vault_servers  = array_unique(consul_curl("/v1/catalog/service/vault", "Node"));
   $nomad_servers  = array_unique(consul_curl("/v1/catalog/service/nomad", "Node"));
-  $consul_clients = sort(array_unique(consul_curl("/v1/agent/members", "Name")));
+  $consul_clients = ksort(array_unique(consul_curl("/v1/agent/members", "Name")));
   $nomad_clients  = array_unique(consul_curl("/v1/catalog/service/nomad-client", "Node"));
 
   $bla = [
