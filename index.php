@@ -4,11 +4,24 @@
   $consul = $_ENV['CONSUL_HTTP_ADDR'];
 
   $pillars = [
-    "Consul" => $inv->{"consul_servers"}->{'hosts'},
-    "Vault" => $inv->{"vault_servers"}->{'hosts'},
-    "Nomad" => $inv->{"consul_servers"}->{'hosts'},
-    "Docker" => $inv->{"docker_clients"}->{'hosts'}
+    "Consul",
+    "Vault",
+    "Nomad",
+    "Docker"
   ];
+
+  foreach ($inv->{"consul_servers"}->{'hosts'} as $h) {
+    $pillars["Consul"]["Servers"][$h] = ["consul_client" => false, "nomad_client" => false];
+  }
+  foreach ($inv->{"vault_servers"}->{'hosts'} as $h) {
+    $pillars["Vault"]["Servers"][$h] = ["consul_client" => true, "nomad_client" => false];
+  }
+  foreach ($inv->{"nomad_servers"}->{'hosts'} as $h) {
+    $pillars["Nomad"]["Servers"][$h] = ["consul_client" => true, "nomad_client" => false];
+  }
+  foreach ($inv->{"docker_clients"}->{'hosts'} as $h) {
+    $pillars["Docker"]["Servers"][$h] = ["consul_client" => true, "nomad_client" => true];
+  }
 
 ?>
 
@@ -47,16 +60,18 @@
                 class="fak fa-<?=strtolower($pillar)?> color-<?=strtolower($pillar)?> me-2"></i><?=$pillar?>
             </div>
             <div class="d-flex align-items-start flex-column h-100 align-items-center">
-              <?php foreach ($servers as $server) { ?>
+              <?php foreach ($servers["Servers"] as $server) { ?>
+              <?php foreach ($server as $h => $d) { ?>
               <div class="d-flex col flex-column text-center">
                 <div class="border rounded p-4 d-flex flex-column server">
                   <span class="fa-stack mb-4">
                     <i class="fak fa-<?=strtolower($pillar)?> fa-stack-1x color-gray" data-fa-transform="left-13"></i>
                     <i class="fat fa-server fa-4x"></i>
                   </span>
-                  <span class="mt-1"><?=$server?></span>
+                  <span class="mt-1"><?=$h?></span>
                 </div>
               </div>
+              <?php } ?>
               <?php } ?>
             </div>
           </div>
