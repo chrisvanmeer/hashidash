@@ -58,7 +58,7 @@
     //echo $curl_errno;
     //echo $curl_error;
     curl_close($ch);
-    $data = json_encode($data);
+    $data = json_decode($data);
     error_log($data);
     $output = [];
     foreach ($data as $d) {
