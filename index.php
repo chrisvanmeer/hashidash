@@ -29,7 +29,7 @@
   }
 
 
-  function consul_curl ($path, $host, $check) {
+  function consul_curl ($path, $element) {
     global $consul_address, $consul_token, $pillars, $checks;
 
     $url = $consul_address.$path;
@@ -38,12 +38,9 @@
       CURLOPT_RETURNTRANSFER => true,         // return web page
       CURLOPT_HEADER         => false,        // don't return headers
       CURLOPT_FOLLOWLOCATION => false,         // follow redirects
-      // CURLOPT_ENCODING       => "utf-8",           // handle all encodings
       CURLOPT_AUTOREFERER    => true,         // set referer on redirect
       CURLOPT_CONNECTTIMEOUT => 20,          // timeout on connect
       CURLOPT_TIMEOUT        => 20,          // timeout on response
-      // CURLOPT_POST            => ,            // i am sending post data
-      // CURLOPT_POSTFIELDS     => $request,    // this are my post vars
       CURLOPT_SSL_VERIFYHOST => 0,            // don't verify ssl
       CURLOPT_SSL_VERIFYPEER => false,        //
       CURLOPT_VERBOSE        => 1,
@@ -61,13 +58,29 @@
     //echo $curl_errno;
     //echo $curl_error;
     curl_close($ch);
-    return $data;
-
+    $output = [];
+    foreach ($data as $d) {
+      $output[] = $d[$element];
+    };
+    return $output;
   }
 
+  $consul_servers = consul_curl("/v1/catalog/service/consul", "Node");
+  $vault_servers  = consul_curl("/v1/catalog/service/vault", "Node");
+  $nomad_servers  = consul_curl("/v1/catalog/service/nomad", "Node");
+  $consul_clients = consul_curl("/v1/agent/members", "Name");
+  $nomad_clients  = consul_curl("/v1/catalog/service/nomad-client", "Node");
+
+  $bla = [
+    $consul_servers,
+    $vault_servers,
+    $nomad_servers,
+    $consul_clients,
+    $nomad_clients
+  ];
+
   echo "<pre>";
-    $bla = consul_curl("/v1/catalog/services", "consul1", "");
-    echo $bla;
+    print_r($bla);
   echo "</pre>";
 
 ?>
