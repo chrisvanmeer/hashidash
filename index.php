@@ -22,7 +22,7 @@
 <body class="d-flex h-100">
 
   <pre>
-  <?php print_r($inv['consul_clients']); ?>
+  <?php print_r($inv); ?>
   </pre>
 
   <div class="container-fluid g-0">
