@@ -22,7 +22,7 @@
 <body class="d-flex h-100">
 
   <pre>
-  <?=json_decode($inv)?>
+  <?php print_r($inv['consul_clients']); ?>
   </pre>
 
   <div class="container-fluid g-0">
