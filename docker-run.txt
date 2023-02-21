@@ -1,0 +1,4 @@
+CONSUL_HTTP_ADDR=https://10.0.250.21:8501
+CONSUL_HTTP_TOKEN=24df13bd-5e80-a604-c911-xxxxxxxxxxx
+
+docker run -d --name hashidash -p 8888:80 -v /home/guru00/hashidash:/var/www/html --env "INVENTORY=$(ansible-inventory --list)" --env "CONSUL_HTTP_ADDR=$CONSUL_HTTP_ADDR" --env "CONSUL_HTTP_TOKEN=$CONSUL_HTTP_TOKEN" richarvey/nginx-php-fpm:latest
