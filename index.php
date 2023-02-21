@@ -130,7 +130,7 @@
 
                   if (in_array($server, $consul_clients)) { $cc = "consul"; $currentchecks++; } else { $cc = "gray"; }
                   if (in_array($server, $nomad_clients)) { $nc = "nomad"; $currentchecks++; } else { $nc = "gray"; }
-                  if ($currentchecks == $totalchecks) { $border = " border-color-success"; } else { $border = " border-color-danger"; }
+                  if ($currentchecks == $totalchecks) { $border = " border-color-success shadow-sm"; } else { $border = " border-color-danger shadow-sm"; }
                   if ($currentchecks == 0) { $border = ""; }
                 ?>
               <div class="d-flex col flex-column text-center">
