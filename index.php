@@ -56,12 +56,7 @@
           $output[] = $d->$element;
         }
       } elseif ($element != "") {
-        if (strpos($element, "|") !== false) {
-          $split = explode("|", $element);
-          $output[] = [$d->$split[0]=> $d->$split[1]];
-        } else {
-          $output[] = $d->$element;
-        }
+        $output[] = $d->$element;
       } else {
         $output[] = $d;
       }
@@ -74,7 +69,6 @@
   $nomad_servers  = array_unique(consul_curl("/v1/catalog/service/nomad", "Node"));
   $consul_clients = array_unique(consul_curl("/v1/agent/members", "Name", "Status", "1"));
   $nomad_clients  = array_unique(consul_curl("/v1/catalog/service/nomad-client", "Node"));
-  $all_clients    = array_unique(consul_curl("/v1/agent/members", "Name|Addr"));
 
   $bla = [
     $consul_servers,
@@ -82,7 +76,6 @@
     $nomad_servers,
     $consul_clients,
     $nomad_clients,
-    $all_clients
   ];
 
   echo "<pre>";
@@ -146,7 +139,7 @@
                   if (in_array($server, $consul_clients)) { $cc = "consul"; $currentchecks++; } else { $cc = "gray"; }
                   if (in_array($server, $nomad_clients)) { $nc = "nomad"; $currentchecks++; } else { $nc = "gray"; }
                   if ($currentchecks == $totalchecks) { $border = " border-color-success shadow-sm"; } else { $border = " border-color-danger shadow-sm"; }
-                  if ($currentchecks == 0) { $border = ""; }
+                  // if ($currentchecks == 0) { $border = ""; }
                 ?>
               <div class="d-flex col flex-column text-center">
                 <div class="border rounded p-4 d-flex flex-column server<?=$border?>">
