@@ -70,6 +70,10 @@
     $nomad_clients
   ];
 
+  echo "<pre>";
+    print_r($bla);
+  echo "</pre>";
+
 ?>
 
 <!doctype html>
