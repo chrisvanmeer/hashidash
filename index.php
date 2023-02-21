@@ -56,7 +56,7 @@
           $output[] = $d->$element;
         }
       } elseif ($element != "") {
-        if (str_contains("|", $element)) {
+        if (strpos($element, "|") !== false) {
           $split = explode("|", $element);
           $output[$d->$split[0]] = $d->$split[1];
         } else {
