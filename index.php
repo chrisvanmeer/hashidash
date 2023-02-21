@@ -130,10 +130,10 @@
                   <span class="fa-stack mb-4">
                     <i class="fak fa-<?=strtolower($pillar)?> fa-stack-1x color-<?=$c?>"
                       data-fa-transform="left-13"></i>
-                    <?php if ($pillar_data["Checks"]["consul_client"]) { ?>
+                    <?php if (in_array("consul_client", $pillar_data["Checks"])) { ?>
                     <i class="fak fa-consul fa-stack-1x color-<?=$cc?>" data-fa-transform="up-22 left-40"></i>
                     <?php } ?>
-                    <?php if ($pillar_data["Checks"]["nomad_client"]) { ?>
+                    <?php if (in_array("nomad_client", $pillar_data["Checks"])) { ?>
                     <i class="fak fa-nomad fa-stack-1x color-<?=$nc?>" data-fa-transform="up-22 right-40"></i>
                     <?php } ?>
                     <i class="fat fa-server fa-4x"></i>
