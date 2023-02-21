@@ -42,8 +42,8 @@
       CURLOPT_AUTOREFERER    => true,         // set referer on redirect
       CURLOPT_CONNECTTIMEOUT => 20,          // timeout on connect
       CURLOPT_TIMEOUT        => 20,          // timeout on response
-      CURLOPT_POST            => 1,            // i am sending post data
-      CURLOPT_POSTFIELDS     => $request,    // this are my post vars
+      // CURLOPT_POST            => ,            // i am sending post data
+      // CURLOPT_POSTFIELDS     => $request,    // this are my post vars
       CURLOPT_SSL_VERIFYHOST => 0,            // don't verify ssl
       CURLOPT_SSL_VERIFYPEER => false,        //
       CURLOPT_VERBOSE        => 1,
@@ -66,7 +66,7 @@
   }
 
   echo "<pre>";
-    $bla = consul_curl("/v1/sys/health", "consul1", "");
+    $bla = consul_curl("/v1/catalog/services", "consul1", "");
     echo $bla;
   echo "</pre>";
 
