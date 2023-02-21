@@ -119,10 +119,19 @@
               <?php
                   $totalchecks = count($pillar_data["Checks"]) + 1;
                   $currentchecks = 0;
-                  if (in_array($server, $consul_servers)) { $c = "consul"; $currentchecks++; } else { $c = "gray"; }
-                  if (in_array($server, $vault_servers)) { $c = "vault"; $currentchecks++; } else { $c = "gray"; }
-                  if (in_array($server, $nomad_servers)) { $c = "nomad"; $currentchecks++; } else { $c = "gray"; }
-                  if (in_array($server, $nomad_clients)) { $c = "docker"; $currentchecks++; } else { $c = "gray"; }
+
+                  if (in_array($server, $consul_servers)) {
+                    $c = "consul"; $currentchecks++;
+                  } elseif (in_array($server, $vault_servers)) {
+                    $c = "vault"; $currentchecks++;
+                  } elseif (in_array($server, $nomad_servers)) {
+                    $c = "nomad"; $currentchecks++;
+                  } elseif (in_array($server, $nomad_clients)) {
+                    $c = "docker"; $currentchecks++;
+                  } else {
+                    $c = "gray";
+                  }
+
                   if (in_array($server, $consul_clients)) { $cc = "consul"; $currentchecks++; } else { $cc = "gray"; }
                   if (in_array($server, $nomad_clients)) { $nc = "nomad"; $currentchecks++; } else { $nc = "gray"; }
                   if ($currentchecks == $totalchecks) { $border = " border-color-success"; } else { $border = " border-color-danger"; }
