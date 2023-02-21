@@ -1,6 +1,6 @@
 <?php
 
-  $inv = json_encode($_ENV['INVENTORY']);
+  $inv = json_decode($_ENV['INVENTORY']);
 
 ?>
 
@@ -22,7 +22,7 @@
 <body class="d-flex h-100">
 
   <pre>
-  <?php print_r($inv); ?>
+  <?php print_r($inv)["consul_clients"]; ?>
   </pre>
 
   <div class="container-fluid g-0">
