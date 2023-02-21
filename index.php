@@ -66,11 +66,11 @@
     return $output;
   }
 
-  $consul_servers = array_unique(sort(consul_curl("/v1/catalog/service/consul", "Node")));
-  $vault_servers  = array_unique(sort(consul_curl("/v1/catalog/service/vault", "Node")));
-  $nomad_servers  = array_unique(sort(consul_curl("/v1/catalog/service/nomad", "Node")));
-  $consul_clients = array_unique(sort(consul_curl("/v1/agent/members", "Name")));
-  $nomad_clients  = array_unique(sort(consul_curl("/v1/catalog/service/nomad-client", "Node")));
+  $consul_servers = array_unique(consul_curl("/v1/catalog/service/consul", "Node"));
+  $vault_servers  = array_unique(consul_curl("/v1/catalog/service/vault", "Node"));
+  $nomad_servers  = array_unique(consul_curl("/v1/catalog/service/nomad", "Node"));
+  $consul_clients = array_unique(consul_curl("/v1/agent/members", "Name"));
+  $nomad_clients  = array_unique(consul_curl("/v1/catalog/service/nomad-client", "Node"));
 
   $bla = [
     $consul_servers,
