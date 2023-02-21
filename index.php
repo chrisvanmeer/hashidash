@@ -23,7 +23,7 @@
     $pillars["Docker"]["Checks"] = ["consul_client", "nomad_client"];
   }
 
-  function consul_curl ($path, $element, $search = "", $value = "") {
+  function consul_curl ($path, $element = "", $search = "", $value = "") {
     global $consul_address, $consul_token, $pillars, $checks;
 
     $url = $consul_address.$path;
@@ -55,8 +55,10 @@
         if ($d->$search == "$value") {
           $output[] = $d->$element;
         }
-      } else {
+      } elseif ($element != "") {
         $output[] = $d->$element;
+      } else {
+        $output[] = $d;
       }
     };
     return $output;
@@ -67,13 +69,19 @@
   $nomad_servers  = array_unique(consul_curl("/v1/catalog/service/nomad", "Node"));
   $consul_clients = array_unique(consul_curl("/v1/agent/members", "Name", "Status", "1"));
   $nomad_clients  = array_unique(consul_curl("/v1/catalog/service/nomad-client", "Node"));
+  $all_names      = array_unique(consul_curl("/v1/agent/members", "Name"));
+  $all_addr       = array_unique(consul_curl("/v1/agent/members", "Addr"));
+  $all_clients    = array_combine($all_names, $all_addr);
 
   $bla = [
     $consul_servers,
     $vault_servers,
     $nomad_servers,
     $consul_clients,
-    $nomad_clients
+    $nomad_clients,
+    $all_names,
+    $all_addr,
+    $all_clients
   ];
 
   echo "<pre>";
