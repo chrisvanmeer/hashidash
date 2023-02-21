@@ -117,7 +117,7 @@
                   $currentchecks = 0;
 
                   if (in_array($server, $consul_servers)) {
-                    $c = "consul"; $currentchecks++; $currentchecks++;
+                    $c = "consul";
                   } elseif (in_array($server, $vault_servers)) {
                     $c = "vault"; $currentchecks++;
                   } elseif (in_array($server, $nomad_servers)) {
@@ -162,16 +162,3 @@
 </body>
 
 </html>
-
-<!-- 
-              <div class="d-flex col flex-column text-center">
-                <div class="border rounded p-4 d-flex flex-column server">
-                  <span class="fa-stack mb-4">
-                    <i class="fak fa-docker fa-stack-1x color-docker" data-fa-transform="left-12"></i>
-                    <i class="fak fa-consul fa-stack-1x color-gray" data-fa-transform="up-22 left-40"></i>
-                    <i class="fak fa-nomad fa-stack-1x color-gray" data-fa-transform="up-22 right-40"></i>
-                    <i class="fat fa-server fa-4x"></i>
-                  </span>
-                  <span class="mt-1">docker3</span>
-                </div>
-              </div> -->
