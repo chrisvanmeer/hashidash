@@ -1,0 +1,40 @@
+.server {
+  width: 10vw;
+  height: 10vw;
+}
+
+.color-gray {
+  color: #ccc;
+}
+
+.color-boundary {
+  color: #f24c53;
+}
+
+.color-consul {
+  color: #e03875;
+}
+
+.color-vault {
+  color: #ffd814;
+}
+
+.color-nomad {
+  color: #00ca8e;
+}
+
+.color-docker {
+  color: #0db7ed;
+}
+
+.border-color-danger {
+  border-color: #f24c53 !important;
+}
+
+.border-color-success {
+  border-color: #00ca8e !important;
+}
+
+.fa-stack {
+  width: unset;
+}
