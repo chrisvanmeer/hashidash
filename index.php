@@ -59,6 +59,7 @@
     //echo $curl_error;
     curl_close($ch);
     $data = json_encode($data);
+    error_log($data);
     $output = [];
     foreach ($data as $d) {
       $output[] = $d->$element;
