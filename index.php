@@ -123,7 +123,7 @@
             <div class="d-flex align-items-start flex-column h-100 align-items-center">
               <?php foreach ($pillar_data["Servers"] as $server) { ?>
               <?php
-                  $totalchecks = count($pillar_data["Checks"] + 1);
+                  $totalchecks = count($pillar_data["Checks"]) + 1;
                   $currentchecks = 0;
                   if (in_array($server, $consul_servers)) { $c = "consul"; $currentchecks++; } else { $c = "gray"; }
                   if (in_array($server, $consul_clients)) { $cc = "consul"; $currentchecks++; } else { $cc = "gray"; }
