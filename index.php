@@ -6,28 +6,22 @@
 
   $pillars = [];
 
-  $checks = [
-    "consul_client",
-    "nomad_client"
-  ];
-
   foreach ($inv->{"consul_servers"}->{'hosts'} as $h) {
     $pillars["Consul"]["Servers"][] = $h;
-    $pillars["Consul"]["Checks"] = ["consul_client" => false, "nomad_client" => false];
+    $pillars["Consul"]["Checks"] = [];
   }
   foreach ($inv->{"vault_servers"}->{'hosts'} as $h) {
     $pillars["Vault"]["Servers"][] = $h;
-    $pillars["Vault"]["Checks"] = ["consul_client" => true, "nomad_client" => false];
+    $pillars["Vault"]["Checks"] = ["consul_client"];
   }
   foreach ($inv->{"nomad_servers"}->{'hosts'} as $h) {
     $pillars["Nomad"]["Servers"][] = $h;
-    $pillars["Nomad"]["Checks"] = ["consul_client" => true, "nomad_client" => false];
+    $pillars["Nomad"]["Checks"] = ["consul_client"];
   }
   foreach ($inv->{"docker_clients"}->{'hosts'} as $h) {
     $pillars["Docker"]["Servers"][] = $h;
-    $pillars["Docker"]["Checks"] = ["consul_client" => true, "nomad_client" => true];
+    $pillars["Docker"]["Checks"] = ["consul_client", "nomad_client"];
   }
-
 
   function consul_curl ($path, $element) {
     global $consul_address, $consul_token, $pillars, $checks;
