@@ -1,0 +1,106 @@
+@font-face {
+  font-family: gilmer-web;
+  src: url("https://hashilab.nl/css/fonts/gilmer_light-webfont.woff2") format("woff2"), url("https://hashilab.nl/css/fonts/gilmer_light-webfont.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: gilmer-web;
+  src: url("https://hashilab.nl/css/fonts/gilmer-webfont.woff2") format("woff2"), url("https://hashilab.nl/css/fonts/gilmer-webfont.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: gilmer-web;
+  src: url("https://hashilab.nl/css/fonts/gilmer_medium-webfont.woff2") format("woff2"), url("https://hashilab.nl/css/fonts/gilmer_medium-webfont.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: gilmer-web;
+  src: url("https://hashilab.nl/css/fonts/gilmer_bold-webfont.woff2") format("woff2"), url("https://hashilab.nl/css/fonts/gilmer_bold-webfont.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: metro-web;
+  src: url("https://hashilab.nl/css/fonts/metrosans-book-webfont.woff2") format("woff2"), url("https://hashilab.nl/css/fonts/metrosans-book-webfont.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: metro-web;
+  src: url("https://hashilab.nl/css/fonts/metrosans-regular-webfont.woff2") format("woff2"), url("https://hashilab.nl/css/fonts/metrosans-regular-webfont.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: metro-web;
+  src: url("https://hashilab.nl/css/fonts/metrosans-semibold-webfont.woff2") format("woff2"), url("https://hashilab.nl/css/fonts/metrosans-semibold-webfont.woff") format("woff");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: metro-web;
+  src: url("https://hashilab.nl/css/fonts/metrosans-bold-webfont.woff2") format("woff2"), url("https://hashilab.nl/css/fonts/metrosans-bold-webfont.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: dejavu-sans-mono-web;
+  src: url("https://hashilab.nl/css/fonts/dejavusansmono-webfont.woff2") format("woff2"), url("https://hashilab.nl/css/fonts/dejavusansmono-webfont.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --bs-consul: #e03875;
+  --bs-nomad: #00ca8e;
+  --bs-terraform: #7b42bc;
+  --bs-packer: #02a8ef;
+  --bs-vault: #ffd814;
+  --bs-boundary: #f24c53;
+  --bs-waypoint: #14c6cb;
+  --bs-vagrant: #1868f2;
+  --atcomputing: #3399cc;
+  --bs-font-sans-serif: metro-web, gilmer-web, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --bs-font-monospace: dejavu-sans-mono-web, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.display-1,
+.display-2,
+.display-3,
+.display-4,
+.display-5,
+.display-6,
+.fs-1,
+.fs-2,
+.fs-3,
+.fs-4,
+.fs-5,
+.fs-6 {
+  font-family: gilmer-web;
+}
