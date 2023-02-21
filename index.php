@@ -72,7 +72,7 @@
                     <i class="fak fa-consul fa-stack-1x color-gray" data-fa-transform="up-22 left-40"></i>
                     <?php } ?>
                     <?php if ($pillar_data["Checks"]["nomad_client"]) { ?>
-                    <i class="fak fa-nomad fa-stack-1x color-gray" data-fa-transform="up-22 left-40"></i>
+                    <i class="fak fa-nomad fa-stack-1x color-gray" data-fa-transform="up-22 right-40"></i>
                     <?php } ?>
                     <i class="fat fa-server fa-4x"></i>
                   </span>
